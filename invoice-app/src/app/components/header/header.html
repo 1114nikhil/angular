@@ -1,31 +1,36 @@
-<nav class="navbar navbar-expand-lg bg-custom-blue text-white px-3 shadow-sm" style="height: 56px;">
-    <div class="d-flex align-items-center w-100 justify-content-between">
-        <!-- Left Section -->
-        <div class="d-flex align-items-center gap-3">
-            <i class="bi bi-list fs-3 cursor-pointer" (click)="sidebarService.toggle()"></i>
-            <div class="user-initials bg-pink rounded-2 d-flex align-items-center justify-content-center fw-bold"
-                style="width: 32px; height: 32px;">
-                R
-            </div>
-            <span class="fw-bold d-none d-sm-block">RADWAN</span>
-            <div class="vr mx-2 opacity-50"></div>
-            <span class="cursor-pointer fw-bold small border px-2 rounded-2" (click)="languageService.toggleLanguage()">
-                {{ languageService.currentLang() === 'en' ? 'العربية' : 'English' }}
-            </span>
-            <i class="bi bi-bell-fill fs-5 cursor-pointer"></i>
-            <i class="bi bi-question-circle-fill fs-5 cursor-pointer"></i>
-            <i class="bi bi-life-preserver fs-5 cursor-pointer"></i>
+<div class="d-flex align-items-center justify-content-between px-3 bg-custom-blue text-white shadow-sm"
+    style="height: 56px;">
+    <!-- Left Section -->
+    <div class="d-flex align-items-center gap-2">
+        <p-button icon="pi pi-bars" [text]="true" [rounded]="true" styleClass="text-white"
+            (onClick)="sidebarService.toggle()"></p-button>
+
+        <p-avatar label="R" styleClass="bg-pink text-white fw-bold" shape="circle"
+            [style]="{'width':'32px', 'height':'32px'}"></p-avatar>
+
+        <span class="fw-bold d-none d-sm-block ms-1">RADWAN</span>
+
+        <div class="vr mx-2 opacity-50"></div>
+
+        <div class="cursor-pointer fw-bold small border border-white-alpha-30 px-2 py-1 rounded-2 hover:bg-white-alpha-10 transition-colors"
+            (click)="languageService.toggleLanguage()">
+            {{ languageService.currentLang() === 'en' ? 'العربية' : 'English' }}
         </div>
 
-        <!-- Center Section -->
-        <div class="position-absolute start-50 translate-middle-x">
-            <span class="badge bg-light text-primary rounded-pill me-2 px-2">Sponsored</span>
-            <span class="fw-bold fs-5">#000155 Price Quote</span>
-        </div>
-
-        <!-- Right Section -->
-        <div>
-            <i class="bi bi-box-arrow-right fs-4 cursor-pointer"></i>
-        </div>
+        <p-button icon="pi pi-bell" [text]="true" [rounded]="true" styleClass="text-white"></p-button>
+        <p-button icon="pi pi-question-circle" [text]="true" [rounded]="true" styleClass="text-white"></p-button>
+        <p-button icon="pi pi-life-buoy" [text]="true" [rounded]="true" styleClass="text-white"></p-button>
+        <!-- Life Preserver equiv -->
     </div>
-</nav>
+
+    <!-- Center Section -->
+    <div class="position-absolute start-50 translate-middle-x d-flex align-items-center">
+        <span class="badge bg-light text-primary rounded-pill me-2 px-2 shadow-sm">Sponsored</span>
+        <span class="fw-bold fs-5">#000155 Price Quote</span>
+    </div>
+
+    <!-- Right Section -->
+    <div>
+        <p-button icon="pi pi-sign-out" [text]="true" [rounded]="true" styleClass="text-white"></p-button>
+    </div>
+</div>

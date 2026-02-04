@@ -9,8 +9,8 @@
                 <div class="row justify-content-center">
                     <div class="col-12" style="max-width: 950px;">
                         <!-- Comments List -->
-                        <div class="mb-4">
-                            <div *ngFor="let comment of comments" class="text-end mb-3 border-bottom pb-3">
+                        <div class="mb-4" [dir]="languageService.direction()">
+                            <div *ngFor="let comment of comments" class="mb-3 border-bottom pb-3 ltr">
                                 <h6 class="fw-bold mb-0 text-dark">{{comment.name}}</h6>
                                 <small class="text-muted d-block mb-2">Sent: {{comment.date | date:'dd/MM/yyyy
                                     HH:mm'}}</small>
@@ -19,14 +19,13 @@
                         </div>
 
                         <!-- Input Area -->
-                        <div class="border p-4 bg-white">
-                            <h6 class="fw-bold text-end mb-3 text-secondary">Insert a new comment:</h6>
-                            <textarea class="form-control mb-3 rounded-0" rows="3"
+                        <div class="border p-4 bg-white shadow-sm">
+                            <h6 class="fw-bold mb-3 text-secondary">Insert a new comment:</h6>
+                            <textarea pTextarea [autoResize]="true" class="w-100 mb-3" rows="3"
                                 [(ngModel)]="newCommentText"></textarea>
-                            <div class="text-end">
-                                <button class="btn btn-success rounded-0 px-4 py-2 fw-bold" (click)="addComment()">
-                                    Send the Note <i class="bi bi-chevron-left ms-2 fs-6"></i>
-                                </button>
+                            <div>
+                                <p-button label="Send the Note" icon="pi pi-chevron-left" iconPos="right"
+                                    severity="success" [rounded]="false" (onClick)="addComment()"></p-button>
                             </div>
                         </div>
                     </div>
@@ -34,18 +33,17 @@
             </p-tabpanel>
             <p-tabpanel value="1">
                 <!-- Toolbar -->
-                <div class="d-flex justify-content-end gap-2 mb-3 mx-auto" style="max-width: 950px;">
-                    <div class="btn-group">
-                        <button class="btn btn-info text-white btn-sm rounded-0 text-start ps-3 fw-bold"
-                            style="min-width: 80px;">print</button>
-                        <button class="btn btn-info text-white btn-sm rounded-0"><i
-                                class="bi bi-printer-fill"></i></button>
+                <div class="d-flex gap-2 mb-3 mx-auto" style="max-width: 950px;">
+                    <div class="d-flex">
+                        <p-button label="print" icon="pi pi-print" severity="info" styleClass="rounded-0 rounded-start"
+                            size="small"></p-button>
+                        <p-button icon="pi pi-print" severity="info" styleClass="rounded-0 rounded-end"
+                            size="small"></p-button>
                     </div>
-                    <div class="bg-light px-2 py-1 d-flex gap-2 align-items-center border cursor-pointer">
-                        <span class="small fw-bold">PDF</span>
-                        <i class="bi bi-file-earmark-pdf"></i>
-                        <i class="bi bi-chevron-down small text-muted"></i>
-                    </div>
+
+                    <p-button label="PDF" icon="pi pi-file-pdf" severity="secondary" [outlined]="true" size="small">
+                        <i class="pi pi-chevron-down ms-2 text-xs"></i>
+                    </p-button>
                 </div>
 
                 <!-- Main Sheet -->
@@ -53,10 +51,11 @@
 
                     <!-- Invoice Content -->
                     <div class="text-center mb-5 position-relative">
-                        <h2 class="fw-bold mb-4 text-end">Price list</h2>
+                        <h2 class="fw-bold mb-4">Price list</h2>
                         <div
                             class="logo-box bg-dark mx-auto mb-3 d-flex align-items-center justify-content-center rounded-3">
-                            <i class="bi bi-cpu-fill text-info fs-1"></i>
+                            <i class="pi pi-verified text-info fs-1"></i>
+                            <!-- Replaced cpu with verified/chip logic or just verified -->
                         </div>
                     </div>
 
@@ -86,35 +85,32 @@
                         </div>
                     </div>
 
-                    <!-- Table -->
-                    <table class="table table-bordered border-dark text-center align-middle mb-5">
-                        <thead class="table-light bg-light-gray">
-                            <tr>
-                                <th scope="col" class="text-end" style="width: 15%">the total</th>
-                                <th scope="col" style="width: 10%">Quantity</th>
-                                <th scope="col" style="width: 15%">unit price</th>
-                                <th scope="col" class="text-end w-40">Description</th>
-                                <th scope="col" style="width: 20%">Item</th>
+                    <!-- P-Table -->
+                    <p-table [value]="invoiceItems" styleClass="p-datatable-gridlines p-datatable-sm mb-5 text-center">
+                        <ng-template pTemplate="header">
+                            <tr class="bg-light-gray">
+                                <th class="text-end" style="width: 15%">the total</th>
+                                <th style="width: 10%">Quantity</th>
+                                <th style="width: 15%">unit price</th>
+                                <th class="text-end w-40">Description</th>
+                                <th style="width: 20%">Item</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item>
                             <tr>
-                                <td class="text-end">5.00</td>
-                                <td>1</td>
-                                <td>5.00</td>
+                                <td class="text-end">{{item.total | number:'1.2-2'}}</td>
+                                <td>{{item.quantity}}</td>
+                                <td>{{item.unitPrice | number:'1.2-2'}}</td>
                                 <td class="text-end small">
-                                    <span class="d-block fw-bold">8GB Memory</span>
+                                    <span class="d-block fw-bold">{{item.description}}</span>
                                     <span class="text-muted" style="font-size: 0.8rem">
-                                        2x Intel® Xeon® CPU E-4214 @2.2<br>
-                                        Space Win Touch<br>
-                                        100TB Bandwidth/mo<br>
-                                        Sophos XG Firewall<br>
-                                        1 Static IP<br>
-                                        Vmware horizon view server
+                                        <div *ngFor="let detail of item.details">{{detail}}</div>
                                     </span>
                                 </td>
-                                <td class="small fw-bold">8GB RAM</td>
+                                <td class="small fw-bold">{{item.item}}</td>
                             </tr>
+                        </ng-template>
+                        <ng-template pTemplate="footer">
                             <tr class="fw-bold bg-light">
                                 <td class="text-end">5.00</td>
                                 <td colspan="4" class="text-end">the total</td>
@@ -123,12 +119,12 @@
                                 <td class="text-end">0.75</td>
                                 <td colspan="4" class="text-end">Value added (15%)</td>
                             </tr>
-                            <tr class="fw-bold bg-secondary text-white">
+                            <tr class="fw-bold surface-200">
                                 <td class="text-end">5.75</td>
                                 <td colspan="4" class="text-end">Total</td>
                             </tr>
-                        </tbody>
-                    </table>
+                        </ng-template>
+                    </p-table>
 
                     <!-- Footer -->
                     <div class="mt-5 text-end small text-muted fst-italic">

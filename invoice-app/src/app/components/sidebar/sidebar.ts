@@ -2,13 +2,14 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DrawerModule } from 'primeng/drawer';
 import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
 import { SidebarService } from '../../services/sidebar.service';
 import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule, DrawerModule, ButtonModule],
+  imports: [CommonModule, DrawerModule, ButtonModule, RippleModule],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',
 })
