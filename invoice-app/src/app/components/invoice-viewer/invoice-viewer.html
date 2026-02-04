@@ -1,0 +1,156 @@
+<div class="px-5 pt-3">
+    <p-tabs value="1">
+        <p-tablist>
+            <p-tab value="0">comments</p-tab>
+            <p-tab value="1">Price Offers</p-tab>
+        </p-tablist>
+        <p-tabpanels>
+            <p-tabpanel value="0">
+                <div class="row justify-content-center">
+                    <div class="col-12" style="max-width: 950px;">
+                        <!-- Comments List -->
+                        <div class="mb-4">
+                            <div *ngFor="let comment of comments" class="text-end mb-3 border-bottom pb-3">
+                                <h6 class="fw-bold mb-0 text-dark">{{comment.name}}</h6>
+                                <small class="text-muted d-block mb-2">Sent: {{comment.date | date:'dd/MM/yyyy
+                                    HH:mm'}}</small>
+                                <p class="mb-0 text-dark">{{comment.text}}</p>
+                            </div>
+                        </div>
+
+                        <!-- Input Area -->
+                        <div class="border p-4 bg-white">
+                            <h6 class="fw-bold text-end mb-3 text-secondary">Insert a new comment:</h6>
+                            <textarea class="form-control mb-3 rounded-0" rows="3"
+                                [(ngModel)]="newCommentText"></textarea>
+                            <div class="text-end">
+                                <button class="btn btn-success rounded-0 px-4 py-2 fw-bold" (click)="addComment()">
+                                    Send the Note <i class="bi bi-chevron-left ms-2 fs-6"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-tabpanel>
+            <p-tabpanel value="1">
+                <!-- Toolbar -->
+                <div class="d-flex justify-content-end gap-2 mb-3 mx-auto" style="max-width: 950px;">
+                    <div class="btn-group">
+                        <button class="btn btn-info text-white btn-sm rounded-0 text-start ps-3 fw-bold"
+                            style="min-width: 80px;">print</button>
+                        <button class="btn btn-info text-white btn-sm rounded-0"><i
+                                class="bi bi-printer-fill"></i></button>
+                    </div>
+                    <div class="bg-light px-2 py-1 d-flex gap-2 align-items-center border cursor-pointer">
+                        <span class="small fw-bold">PDF</span>
+                        <i class="bi bi-file-earmark-pdf"></i>
+                        <i class="bi bi-chevron-down small text-muted"></i>
+                    </div>
+                </div>
+
+                <!-- Main Sheet -->
+                <div class="bg-white p-5 shadow mx-auto position-relative invoice-sheet mt-0">
+
+                    <!-- Invoice Content -->
+                    <div class="text-center mb-5 position-relative">
+                        <h2 class="fw-bold mb-4 text-end">Price list</h2>
+                        <div
+                            class="logo-box bg-dark mx-auto mb-3 d-flex align-items-center justify-content-center rounded-3">
+                            <i class="bi bi-cpu-fill text-info fs-1"></i>
+                        </div>
+                    </div>
+
+                    <!-- Company Info -->
+                    <div class="row mb-5 text-start">
+                        <div class="col-7">
+                            <h4 class="fw-bold mb-3">Smart Side Trading Establishment</h4>
+                            <p class="small text-muted mb-1">Commercial Registration Number: 2051234572</p>
+                            <p class="small text-muted mb-1">Tax Number: 3112398549300003</p>
+                            <p class="small text-muted mb-0">Dammam - King Khalid Street - Clock Tower</p>
+                            <p class="small text-muted mb-0">, Dammam 32244</p>
+                        </div>
+                        <div class="col-5 text-end">
+                            <div class="row mb-2">
+                                <div class="col-6 fw-bold text-muted small">000155</div>
+                                <div class="col-6 fw-bold">Price Quote Number</div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-6 text-muted small">22/12/2023</div>
+                                <div class="col-6 fw-bold">Price quote date</div>
+                            </div>
+
+                            <div class="mt-4">
+                                <p class="mb-0 small fw-bold text-muted">Invoice to:</p>
+                                <p class="mb-0 fw-bold">RADWAN</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Table -->
+                    <table class="table table-bordered border-dark text-center align-middle mb-5">
+                        <thead class="table-light bg-light-gray">
+                            <tr>
+                                <th scope="col" class="text-end" style="width: 15%">the total</th>
+                                <th scope="col" style="width: 10%">Quantity</th>
+                                <th scope="col" style="width: 15%">unit price</th>
+                                <th scope="col" class="text-end w-40">Description</th>
+                                <th scope="col" style="width: 20%">Item</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-end">5.00</td>
+                                <td>1</td>
+                                <td>5.00</td>
+                                <td class="text-end small">
+                                    <span class="d-block fw-bold">8GB Memory</span>
+                                    <span class="text-muted" style="font-size: 0.8rem">
+                                        2x Intel® Xeon® CPU E-4214 @2.2<br>
+                                        Space Win Touch<br>
+                                        100TB Bandwidth/mo<br>
+                                        Sophos XG Firewall<br>
+                                        1 Static IP<br>
+                                        Vmware horizon view server
+                                    </span>
+                                </td>
+                                <td class="small fw-bold">8GB RAM</td>
+                            </tr>
+                            <tr class="fw-bold bg-light">
+                                <td class="text-end">5.00</td>
+                                <td colspan="4" class="text-end">the total</td>
+                            </tr>
+                            <tr class="fw-bold bg-light">
+                                <td class="text-end">0.75</td>
+                                <td colspan="4" class="text-end">Value added (15%)</td>
+                            </tr>
+                            <tr class="fw-bold bg-secondary text-white">
+                                <td class="text-end">5.75</td>
+                                <td colspan="4" class="text-end">Total</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Footer -->
+                    <div class="mt-5 text-end small text-muted fst-italic">
+                        <p class="mb-1">The service provided by the second party includes</p>
+                        <p class="mb-3">the following:</p>
+
+                        <p class="mb-0">Linking the server to the peripheral</p>
+                        <p class="mb-0">devices</p>
+                        <p class="mb-0 mt-2">Windows license for the asking program</p>
+                        <p class="mb-0">Sophos firewall High protective via</p>
+                        <p class="mb-0">firewall</p>
+                        <p class="mb-0 mt-2">24 hour technical support service</p>
+                        <p class="mb-0 text-dark">Note: The First party is obligated to make backup of the systems</p>
+                        <p class="mb-0 text-dark">to an external storage medium.</p>
+                    </div>
+
+                    <div class="mt-5 text-center small fw-bold border-top pt-3">
+                        National Bank IBAN (SA2910000001400023637501) in the name of Smart Party Establishment
+                    </div>
+
+                </div>
+            </p-tabpanel>
+        </p-tabpanels>
+    </p-tabs>
+</div>

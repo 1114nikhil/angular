@@ -1,0 +1,50 @@
+.invoice-sheet {
+    max-width: 950px;
+    min-height: 1200px;
+    background-color: white;
+}
+
+.top-rounded {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+.controls-area {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    /* Actually in image it is top leftish but separated */
+    /* width: 120px; Removed to allow dynamic width */
+}
+
+.logo-box {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table-light.bg-light-gray th {
+    background-color: #e9ecef;
+}
+
+/* Custom table borders to match screenshot style roughly */
+.table-bordered> :not(caption)>*>* {
+    border-width: 1px;
+    border-color: #dee2e6;
+}
+
+.bg-secondary {
+    background-color: #6c757d !important;
+}
+
+.btn-success {
+    background-color: #2ecc71;
+    /* Vibrant green */
+    border-color: #2ecc71;
+}
+
+.btn-success:hover {
+    background-color: #27ae60;
+    border-color: #27ae60;
+}

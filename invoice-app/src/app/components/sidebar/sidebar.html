@@ -1,0 +1,90 @@
+<!-- Mobile Drawer -->
+<div class="d-md-none">
+    <p-drawer [visible]="sidebarService.visible() && sidebarService.isMobile()"
+        (visibleChange)="sidebarService.visible.set($event)"
+        [position]="languageService.direction() === 'rtl' ? 'left' : 'right'" [modal]="true" [showCloseIcon]="true"
+        styleClass="w-75">
+        <ng-container *ngTemplateOutlet="sidebarContent"></ng-container>
+    </p-drawer>
+</div>
+
+<!-- Desktop Component -->
+<div class="d-none d-md-flex flex-column h-100 border-end bg-white transition-all"
+    [style.width]="sidebarService.visible() ? '250px' : '70px'">
+
+    @if (sidebarService.visible()) {
+    <ng-container *ngTemplateOutlet="sidebarContent"></ng-container>
+    } @else {
+    <ng-container *ngTemplateOutlet="sidebarCollapsed"></ng-container>
+    }
+</div>
+
+<!-- Reusable Content (Expanded) -->
+<ng-template #sidebarContent>
+    <div class="h-100 d-flex flex-column w-100">
+        <!-- Header -->
+        <div class="p-4 text-center">
+            <h6 class="fw-bold mb-2 text-dark">Smart Side Trading</h6>
+            <span class="text-muted">Establishment</span>
+        </div>
+
+        <!-- Navigation Items -->
+        <div class="d-flex flex-column">
+            <!-- Item 1 -->
+            <div class="d-flex justify-content-between align-items-center p-3 border-top cursor-pointer hover-bg-light">
+                <span class="fw-bold text-secondary">Control panel</span>
+                <i class="bi bi-house-door-fill fs-5 text-secondary"></i>
+            </div>
+            <!-- Item 2 -->
+            <div class="d-flex justify-content-between align-items-center p-3 border-top cursor-pointer hover-bg-light">
+                <span class="fw-bold text-secondary">Bills</span>
+                <i class="bi bi-receipt fs-5 text-secondary"></i>
+            </div>
+            <!-- Item 3 -->
+            <div class="d-flex justify-content-between align-items-center p-3 border-top cursor-pointer hover-bg-light">
+                <span class="fw-bold text-secondary">Price Offers</span>
+                <i class="bi bi-chat-text-fill fs-5 text-secondary"></i>
+            </div>
+            <!-- Item 4 -->
+            <div class="d-flex justify-content-between align-items-center p-3 border-top cursor-pointer hover-bg-light">
+                <span class="fw-bold text-secondary">account statement</span>
+                <i class="bi bi-cash-stack fs-5 text-secondary"></i>
+            </div>
+            <!-- Item 5 -->
+            <div
+                class="d-flex justify-content-between align-items-center p-3 border-top border-bottom cursor-pointer hover-bg-light">
+                <span class="fw-bold text-secondary">My account</span>
+                <i class="bi bi-person-fill fs-5 text-secondary"></i>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- Collapsed Content (Icons Only) -->
+<ng-template #sidebarCollapsed>
+    <div class="h-100 d-flex flex-column align-items-center w-100 pt-4">
+        <!-- Header Icon -->
+        <div class="mb-4 text-center">
+            <i class="bi bi-building fs-4 text-dark"></i>
+        </div>
+
+        <!-- Navigation Icons -->
+        <div class="d-flex flex-column w-100">
+            <div class="p-3 border-top cursor-pointer hover-bg-light text-center">
+                <i class="bi bi-house-door-fill fs-5 text-secondary"></i>
+            </div>
+            <div class="p-3 border-top cursor-pointer hover-bg-light text-center">
+                <i class="bi bi-receipt fs-5 text-secondary"></i>
+            </div>
+            <div class="p-3 border-top cursor-pointer hover-bg-light text-center">
+                <i class="bi bi-chat-text-fill fs-5 text-secondary"></i>
+            </div>
+            <div class="p-3 border-top cursor-pointer hover-bg-light text-center">
+                <i class="bi bi-cash-stack fs-5 text-secondary"></i>
+            </div>
+            <div class="p-3 border-top border-bottom cursor-pointer hover-bg-light text-center">
+                <i class="bi bi-person-fill fs-5 text-secondary"></i>
+            </div>
+        </div>
+    </div>
+</ng-template>
